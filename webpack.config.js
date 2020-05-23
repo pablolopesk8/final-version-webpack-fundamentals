@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -15,7 +16,14 @@ module.exports = {
     publicPath: path.resolve(__dirname, 'public'),
     filename: '[name].js',
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, 'src/html') },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
@@ -47,8 +55,8 @@ module.exports = {
       },
       {
         test: /\.json$/,
-				exclude: /node_modules/,
-				use: [
+        exclude: /node_modules/,
+        use: [
           path.resolve('webpack-loaders/strip-json-comments.js')
         ]
       }
