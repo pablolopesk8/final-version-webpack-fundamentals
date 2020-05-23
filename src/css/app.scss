@@ -1,0 +1,11 @@
+$default-border-color: red;
+
+h1 {
+  padding: 15px;
+
+  border: {
+    color: $default-border-color;
+    style: solid;
+    width: 1px;
+  }
+}
